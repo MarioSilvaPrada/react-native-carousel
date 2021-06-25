@@ -6,7 +6,7 @@
  * @flow strict-local
  */
 
-import React, {useState, useEffect, useRef} from 'react';
+import React, {useState, useRef} from 'react';
 import type {Node} from 'react';
 import {SafeAreaView, Text} from 'react-native';
 import {ThemeProvider} from 'styled-components';
@@ -54,38 +54,37 @@ const App: () => Node = () => {
   const onLayout = (event, index, arr) => {
     const {x} = event.nativeEvent.layout;
     const newObj = {...cardPositions};
+    // positionX of first card
     if (index === 0) {
       newObj.firstCardPosition = x;
       setCardPositions(newObj);
     }
+    // positionX of last card
     if (arr.length === index + 1) {
       newObj.lastCardPosition = x;
       setCardPositions(newObj);
     }
   };
 
-  useEffect(() => {
-    console.log(cardPositions);
-  }, [cardPositions]);
-
   return (
     <ThemeProvider theme={theme}>
-      <SafeAreaView>
+      <S.StyledSafeAreaView>
         <S.Container>
-          <Text>teste</Text>
+          <S.Title>My Carousel</S.Title>
           <S.StyledScrollView
             ref={scrollRef}
             horizontal
-            scrollEnabled={true}
+            scrollEnabled={false}
             scrollEventThrottle={7}
             onScroll={e =>
               getCurrentScreenPosition(e.nativeEvent.contentOffset.x)
             }>
             <S.CarouselWrapper>
-              {data.map(({title}, i, arr) => (
+              {data.map(({title, images}, i, arr) => (
                 <Card
                   key={title}
                   title={title}
+                  images={images}
                   onLayout={e => onLayout(e, i, arr)}
                 />
               ))}
@@ -102,7 +101,7 @@ const App: () => Node = () => {
             ) && <Button onPress={() => handlePress()} />}
           </S.ButtonWrapper>
         </S.Container>
-      </SafeAreaView>
+      </S.StyledSafeAreaView>
     </ThemeProvider>
   );
 };

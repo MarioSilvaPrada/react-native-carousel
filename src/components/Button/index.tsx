@@ -8,7 +8,7 @@ interface Props {
 const Button: FC<Props> = ({isBack, onPress}) => {
   return (
     <S.Container onPress={onPress} isBack={isBack}>
-      <S.StyledText>{!isBack ? '>' : '<'}</S.StyledText>
+      <S.StyledText>{!isBack ? 'ᐅ' : 'ᐊ'}</S.StyledText>
     </S.Container>
   );
 };
