@@ -6,18 +6,18 @@ export const Container = styled(TouchableOpacity)`
   padding: 10px;
   justify-content: center;
   align-items: center;
-  width: 40px;
-  height: 40px;
+  width: 50px;
+  height: 50px;
   border-radius: 100px;
   position: absolute;
   top: 0;
   ${({isBack}) =>
     isBack
       ? css`
-          left: 5px;
+          left: 15px;
         `
       : css`
-          right: 5px;
+          right: 15px;
         `}
 
   z-index: 1;
